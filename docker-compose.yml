@@ -1,0 +1,64 @@
+services:
+  django:
+    build:
+      context: ./django
+      args:
+        - UID
+        - GID
+        - ARCHITECTURE=${HOST_ARCHITECTURE:-arm64v8}
+        - TZ=${HOST_TIMEZONE:-Asia/Tokyo}
+    image: django.custom-form
+    container_name: django.custom-form
+    env_file:
+      - ./env_files/django/.env
+      - ./env_files/postgres/.env
+    environment:
+      - DJANGO_DB_HOST=postgres
+      - DJANGO_DB_PORT=5432
+      - DJANGO_LANGUAGE_CODE=${HOST_LANGCODE:-ja}
+      - DJANGO_TIME_ZONE=${HOST_TIMEZONE:-Asia/Tokyo}
+    volumes:
+      - static.custom-form:/var/www/static
+      - ./django/app:/opt/app
+      - ./django/pyproject.toml:/opt/pyproject.toml
+    ports:
+      - ${HOST_ACCESS_PORT:-3001}:8000
+    depends_on:
+      - postgres
+    networks:
+      - custom-form-dev-net
+    restart: always
+
+  postgres:
+    build:
+      context: ./postgres
+      args:
+        - ARCHITECTURE=${HOST_ARCHITECTURE:-arm64v8}
+        - TZ=${HOST_TIMEZONE:-Asia/Tokyo}
+    image: postgres.custom-form
+    container_name: postgres.custom-form
+    env_file:
+      - ./env_files/postgres/.env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - LANG=C
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --locale=C
+    volumes:
+      - db.custom-form:/var/lib/postgresql/data
+    expose:
+      - 5432
+    networks:
+      - custom-form-dev-net
+    restart: always
+
+networks:
+  custom-form-dev-net:
+    name: custom-form-dev-net
+
+volumes:
+  static.custom-form:
+    name: static-custom-form
+    driver: local
+  db.custom-form:
+    name: postgres-custom-form
+    driver: local
