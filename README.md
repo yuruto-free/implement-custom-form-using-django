@@ -31,7 +31,7 @@ I assume that host environment follows below.
     | :---- | :---- | :---- |
     | `HOST_ACCESS_PORT` | Port number used to connect to web server | 3001 |
     | `HOST_ARCHITECTURE` | Architecture of host machine | arm64v8 |
-    | `HOST_TIMEZONE` | Time Zone in your pc | Asia/Tokyo |
+    | `HOST_TIMEZONE` | Time Zone of your country | Asia/Tokyo |
     | `HOST_LANGCODE` | Language code of your country | ja |
 
 1. Run the following command to create docker image.

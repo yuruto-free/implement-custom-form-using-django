@@ -19,6 +19,7 @@ services:
       - DJANGO_TIME_ZONE=${HOST_TIMEZONE:-Asia/Tokyo}
     volumes:
       - static.custom-form:/var/www/static
+      - ./django/bashrc:/opt/home/.bashrc:ro
       - ./django/app:/opt/app
       - ./django/pyproject.toml:/opt/pyproject.toml
     ports:

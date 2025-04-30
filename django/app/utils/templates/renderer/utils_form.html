@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<div class="row row-cols-1 g-2">
+  {% if form.non_field_errors %}
+  <div class="col text-danger">
+    <p class="fs-5">{% trans "Errors" %}</p>
+    {{ form.non_field_errors }}
+  </div>
+  {% endif %}
+  {% for field in form %}
+  <div class="col">
+    <div class="row">
+      <div class="col-auto">
+        <label for="{{ field.id_for_label }}" class="col-form-label">{{ field.label }}</label>
+      </div>
+      <div class="col-auto">
+        {{ field }}
+      </div>
+      {% if field.help_text %}
+      <div class="col-auto helptext" {% if field.auto_id %}id="{{ field.auto_id }}_helptext"{% endif %}>
+        {{ field.help_text|safe }}
+      </div>
+      {% endif %}
+    </div>
+    {% if field.errors %}
+    <div class="row">
+      <div class="col text-danger fs-6">
+        {{ field.errors }}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% if forloop.last and hidden_fields %}
+  <div class="col">{% for field in hidden_fields %}{{ field }}{% endfor %}</div>
+  {% endif %}
+  {% endfor %}
+</div>
