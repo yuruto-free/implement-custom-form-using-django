@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+{% include 'form.html' with title=_("Author form") form_id='author-form' form=form parent_path=parent_path %}
+{% endblock %}
+
+{% block bodyjs %}
+{% endblock %}

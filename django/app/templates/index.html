@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<h2>{% trans "Index" %}</h2>
+<div class="row justify-content-center">
+  <div class="col">
+    <div class="row row-cols-1 row-cols-md-2 g-2">
+      <div class="col">
+        <a href="{% url 'book:list_author' %}" class="link-underline link-underline-opacity-0">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title fs-3">{% trans "Author list" %}</p>
+              <p class="card-text">{% trans "Show authors." %}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="{% url 'book:list_book' %}" class="link-underline link-underline-opacity-0">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title fs-3">{% trans "Book list" %}</p>
+              <p class="card-text">{% trans "Show books." %}</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

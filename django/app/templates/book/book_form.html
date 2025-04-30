@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+{% include 'form.html' with title=_("Book form") form_id='book-form' form=form parent_path=parent_path %}
+{% endblock %}
+
+{% block bodyjs %}
+{% include form.datalist_js_template_name with form_id='book-form' datalist_ids=form.datalist_ids %}
+{% endblock %}

@@ -1,6 +1,6 @@
 # Backend
 ## Preparation
-1. Run the following command to create table to database and enable changes.
+1. Run the following command to create table to database and to enable changes.
 
     ```bash
     # In the host environment
