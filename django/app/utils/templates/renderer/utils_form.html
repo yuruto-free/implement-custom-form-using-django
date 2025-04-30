@@ -17,7 +17,7 @@
         {{ field }}
       </div>
       {% if field.help_text %}
-      <div class="col-auto helptext" {% if field.auto_id %}id="{{ field.auto_id }}_helptext"{% endif %}>
+      <div class="col-auto align-self-center helptext" {% if field.auto_id %}id="{{ field.auto_id }}_helptext"{% endif %}>
         {{ field.help_text|safe }}
       </div>
       {% endif %}

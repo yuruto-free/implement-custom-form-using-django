@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+{% include 'list.html' with title=_("Book list") create_path=create_path objects=books %}
+{% endblock %}
+
+{% block bodyjs %}
+<script>
+(function () {
+  document.addEventListener('DOMContentLoaded', g_registerDeleteModalEvent);
+})();
+</script>
+{% endblock %}
