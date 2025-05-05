@@ -16,6 +16,7 @@ class Datalist(forms.Select):
 
   def get_context(self, name, value, attrs):
     context = super().get_context(name, value, attrs)
+    context['widget']['initial'] = value
     context['widget']['type'] = self.input_type
     context['widget']['id'] = self.input_list if self.input_list else f'{name}_datalist'
     context['widget']['use_dataset'] = self.use_dataset()

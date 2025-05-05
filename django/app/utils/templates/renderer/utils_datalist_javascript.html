@@ -18,5 +18,18 @@
       }
     }
   });
+  // Add DOM event
+  document.addEventListener('DOMContentLoaded', () => {
+    for (const target_id of ids) {
+      const element = document.querySelector(`#${target_id}`);
+
+      if (element.value) {
+        const datalist = element.getAttribute('list');
+        const options = document.querySelectorAll(`#${datalist} option`);
+        const targetOption = Array.from(options).find((option) => option.dataset.value === element.value);
+        element.value = targetOption.label;
+      }
+    }
+  });
 })();
 </script>

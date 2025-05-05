@@ -1,5 +1,6 @@
 from django import forms
 from .widgets import ModelDatalistField
+from .models import empty_qs
 
 class BaseDatalistModelForm(forms.ModelForm):
   template_name = 'renderer/utils_form.html'
@@ -20,8 +21,8 @@ class BaseDatalistModelForm(forms.ModelForm):
     dynamic_fields = {}
     # Create fields dynamically
     for field_name in datalist_fields:
-      widget = widgets[field_name]
-      options = datalist_kwargs[field_name]
+      widget = widgets.get(field_name, None)
+      options = datalist_kwargs.get(field_name, {'queryset': empty_qs})
       dynamic_fields[field_name] = ModelDatalistField(widget=widget, **options)
     # Define extra datalist field
     self._extra_datalist_fields = [field_name for field_name in datalist_fields]
@@ -36,7 +37,7 @@ class BaseDatalistModelForm(forms.ModelForm):
   @property
   def datalist_ids(self):
     related_fields = [
-      self.fields[field_name] 
+      self.fields[field_name]
       for field_name in self._extra_datalist_fields if self.fields[field_name].widget.use_dataset()
     ]
     datalist_ids = [field.widget.attrs['id'] for field in related_fields]
